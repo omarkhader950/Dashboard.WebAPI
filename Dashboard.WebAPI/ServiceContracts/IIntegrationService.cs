@@ -9,7 +9,7 @@ namespace Dashboard.WebAPI.ServiceContracts
 {
     public interface IIntegrationService
     {
-        Task<IntegrationStatusDto?> GetDataAsync(string integrationName);
+         Task<List<IntegrationStatusDto>?> GetDataAsync(string integrationName);
 
 
     }

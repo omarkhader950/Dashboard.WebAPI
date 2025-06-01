@@ -24,7 +24,7 @@ namespace Dashboard.WebAPI.Services
             _configuration = configuration;
         }
 
-        public async Task<IntegrationStatusDto?> GetDataAsync(string integrationName)
+        public async Task<List<IntegrationStatusDto>?> GetDataAsync(string integrationName)
         {
            
             var configs = _configuration.GetSection("ExternalIntegrations").Get<List<ExternalIntegrationConfig>>()!;
@@ -40,12 +40,17 @@ namespace Dashboard.WebAPI.Services
             var response = await client.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
 
-            var token = JToken.Parse(json).SelectToken(config.JsonPath);
-            if (token == null) return null;
+            // Parse the whole array
+            var list = JArray.Parse(json).ToObject<List<IntegrationStatusDto>>();
+            if (list == null || !list.Any()) return null;
 
-            var dto = token.ToObject<IntegrationStatusDto>();
-            dto!.Name = config.Name;
-            return dto;
+            // Set the name on each one
+            foreach (var item in list)
+            {
+                item.Name = config.Name;
+            }
+
+            return list;
         }
 
        
