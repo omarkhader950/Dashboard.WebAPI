@@ -24,7 +24,15 @@ namespace Dashboard.WebAPI.Controllers
             return Ok(result);
         }
 
-      
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _integrationService.GetAllDataGroupedByNameAsync();
+            if (result == null || !result.Any()) return NotFound();
+
+            return Ok(result);
+        }
+
 
     }
 
