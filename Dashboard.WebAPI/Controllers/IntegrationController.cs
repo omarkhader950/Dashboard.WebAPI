@@ -19,10 +19,13 @@ namespace Dashboard.WebAPI.Controllers
         public async Task<IActionResult> Get(string integrationName)
         {
             var result = await _integrationService.GetDataAsync(integrationName);
-            if (result == null) return NotFound();
+            if (result == null || !result.Any()) return NotFound();
 
             return Ok(result);
         }
+
+      
+
     }
 
 }

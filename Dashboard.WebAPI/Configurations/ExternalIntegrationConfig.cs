@@ -8,12 +8,13 @@ namespace Dashboard.WebAPI.Configurations
 {
     public class ExternalIntegrationConfig
     {
-        public string Name { get; set; }
-        public string Url { get; set; }
-        public string HttpMethod { get; set; }
-        public string AccessKey { get; set; }
-        public string SecretKey { get; set; }
-        public string JsonPath { get; set; }
-        public string DtoType { get; set; }  
+        public string Name { get; set; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
+        public string HttpMethod { get; set; } = "GET";
+        public string AccessKey { get; set; } = string.Empty;
+        public string SecretKey { get; set; } = string.Empty;
+        public string JsonPath { get; set; } = "";
+        public string DtoType { get; set; } = string.Empty;
+
     }
 }
