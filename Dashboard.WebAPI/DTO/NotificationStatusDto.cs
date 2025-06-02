@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,10 @@ namespace Dashboard.WebAPI.DTO
 {
     public class NotificationStatusDto
     {
-        public int PendingApproval { get; set; }
-        public int PendingCorrection { get; set; }
-        public int PendingSubmission { get; set; }
+        public string Name { get; set; } = string.Empty;
+
+        public int TotalPendingApproval { get; set; }
+        public int TotalPendingCorrection { get; set; }
+        public int TotalPendingSubmission { get; set; }
     }
 }

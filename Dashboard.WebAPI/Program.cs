@@ -7,7 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<IIntegrationService, IntegrationService>();
+builder.Services.AddScoped<IExternalIntegrationService, ExternalIntegrationService>();
+
+
+builder.Services.Configure<List<Dashboard.WebAPI.Configurations.ExternalIntegrationConfig>>(
+    builder.Configuration.GetSection("ExternalIntegrations"));
 
 JsonConvert.DefaultSettings = () => new JsonSerializerSettings
 {

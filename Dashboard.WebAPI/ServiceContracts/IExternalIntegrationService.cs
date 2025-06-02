@@ -1,4 +1,5 @@
 ﻿using Dashboard.WebAPI.DTO;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace Dashboard.WebAPI.ServiceContracts
 {
-    public interface IIntegrationService
+    public interface IExternalIntegrationService
     {
-        Task<List<object>?> GetDataAsync(string integrationName);
-
-        Task<Dictionary<string, List<object>>?> GetAllDataGroupedByNameAsync();
-
-
+        Task<List<NormalizedResultDto>> FetchAllAsync();
     }
 }

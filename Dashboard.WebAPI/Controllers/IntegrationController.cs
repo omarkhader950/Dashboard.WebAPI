@@ -8,30 +8,20 @@ namespace Dashboard.WebAPI.Controllers
     [ApiController]
     public class IntegrationController : ControllerBase
     {
-        private readonly IIntegrationService _integrationService;
+        private readonly IExternalIntegrationService _service;
 
-        public IntegrationController(IIntegrationService integrationService)
+        public IntegrationController(IExternalIntegrationService service)
         {
-            _integrationService = integrationService;
+            _service = service;
         }
 
-        [HttpGet("{integrationName}")]
-        public async Task<IActionResult> Get(string integrationName)
+        [HttpGet("dashboard")]
+        public async Task<IActionResult> GetDashboard()
         {
-            var result = await _integrationService.GetDataAsync(integrationName);
-            if (result == null || !result.Any()) return NotFound();
-
-            return Ok(result);
+            var results = await _service.FetchAllAsync();
+            return Ok(results);
         }
 
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _integrationService.GetAllDataGroupedByNameAsync();
-            if (result == null || !result.Any()) return NotFound();
-
-            return Ok(result);
-        }
 
 
     }
