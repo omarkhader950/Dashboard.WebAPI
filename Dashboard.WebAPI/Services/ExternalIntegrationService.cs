@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Dashboard.WebAPI.Configurations;
+using Dashboard.WebAPI.Constants;
 using Dashboard.WebAPI.DTO;
 using Dashboard.WebAPI.ServiceContracts;
 using Microsoft.AspNetCore.Mvc;
@@ -42,8 +43,8 @@ namespace Dashboard.WebAPI.Services
                 var request = new HttpRequestMessage(
                     new HttpMethod(integration.HttpMethod), integration.Url);
 
-                request.Headers.Add("AccessKey", integration.AccessKey);
-                request.Headers.Add("SecretKey", integration.SecretKey);
+                request.Headers.Add(IntegrationHeaderNames.AccessKey, integration.AccessKey);
+                request.Headers.Add(IntegrationHeaderNames.SecretKey, integration.SecretKey);
 
                 var response = await client.SendAsync(request);
                 if (!response.IsSuccessStatusCode) continue;
